@@ -81,11 +81,15 @@ export default class TextButton extends React.Component {
         },
         onTouchMove: event => {
           if (inside(event)) {
-            this.touchInside = true;
-            this.setState({on: true});
+            if (!this.touchInside) {
+              this.touchInside = true;
+              this.setState({on: true});
+            }
           } else {
-            this.touchInside = false;
-            this.setState({on: false});
+            if (this.touchInside) {
+              this.touchInside = false;
+              this.setState({on: false});
+            }
           }
           event.preventDefault();
         },
