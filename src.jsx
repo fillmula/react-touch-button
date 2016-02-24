@@ -60,7 +60,7 @@ export default class TextButton extends React.Component {
         onMouseUp: event => {
           this.mouseDown = false;
           this.setState({on: false});
-          this.props.touchUpInside && this.props.touchUpInside();
+          this.props.touchUpInside && this.props.touchUpInside(event);
         },
         onMouseEnter: event => {
           if (!this.mouseDown) return;
@@ -95,7 +95,7 @@ export default class TextButton extends React.Component {
         },
         onTouchEnd: event => {
           if (this.touchInside) {
-            this.props.touchUpInside && this.props.touchUpInside();
+            this.props.touchUpInside && this.props.touchUpInside(event);
           }
           this.touchInside = false;
           this.setState({on: false});
