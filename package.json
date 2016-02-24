@@ -1,6 +1,6 @@
 {
   "name": "react-text-button",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React text button",
   "main": "index.js",
   "scripts": {
