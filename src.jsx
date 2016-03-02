@@ -21,13 +21,15 @@ export default class TextButton extends React.Component {
     component: React.PropTypes.any.isRequired,
     className: React.PropTypes.string.isRequired,
     style: React.PropTypes.object.isRequired,
-    touchUpInside: React.PropTypes.func
+    touchUpInside: React.PropTypes.func,
+    stopPropagation: React.PropTypes.bool.isRequired
   };
 
   static defaultProps = {
     component: 'span',
     className: 'text-button',
-    style: {}
+    style: {},
+    stopPropagation: true
   };
 
   constructor(props, context) {
@@ -50,26 +52,35 @@ export default class TextButton extends React.Component {
     }
   }
 
+  maybeStopPropagation(event) {
+    if (this.props.stopPropagation) {
+      event.stopPropagation();
+    }
+  }
+
   handlers() {
     if (window.ontouchstart === undefined) {
       return {
         onMouseDown: event => {
           this.mouseDown = true;
           this.setState({on: true});
+          this.maybeStopPropagation(event);
         },
         onMouseUp: event => {
           this.mouseDown = false;
           this.setState({on: false});
           this.props.touchUpInside && this.props.touchUpInside(event);
+          this.maybeStopPropagation(event);
         },
         onMouseEnter: event => {
           if (!this.mouseDown) return;
           this.setState({on: true});
-
+          this.maybeStopPropagation(event);
         },
         onMouseOut: event => {
           if (!this.mouseDown) return;
           this.setState({on: false});
+          this.maybeStopPropagation(event);
         }
       }
     } else {
@@ -78,6 +89,7 @@ export default class TextButton extends React.Component {
           this.touchInside = true;
           this.setState({on: true});
           event.preventDefault();
+          this.maybeStopPropagation(event);
         },
         onTouchMove: event => {
           if (inside(event)) {
@@ -92,6 +104,7 @@ export default class TextButton extends React.Component {
             }
           }
           event.preventDefault();
+          this.maybeStopPropagation(event);
         },
         onTouchEnd: event => {
           if (this.touchInside) {
@@ -100,11 +113,13 @@ export default class TextButton extends React.Component {
           this.touchInside = false;
           this.setState({on: false});
           event.preventDefault();
+          this.maybeStopPropagation(event);
         },
         onTouchCancel: event => {
           this.touchInside = false;
           this.setState({on: false});
           event.preventDefault();
+          this.maybeStopPropagation(event);
         }
       }
     }
