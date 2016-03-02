@@ -29,7 +29,7 @@ export default class TextButton extends React.Component {
     component: 'span',
     className: 'text-button',
     style: {},
-    stopPropagation: true
+    stopPropagation: false
   };
 
   constructor(props, context) {
