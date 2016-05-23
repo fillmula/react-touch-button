@@ -1,6 +1,6 @@
 {
   "name": "react-text-button",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React text button",
   "main": "index.js",
   "scripts": {
@@ -33,11 +33,11 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.4.3",
-    "react-dom": "^0.14.7",
+    "react-dom": "^0.14 || ^15.0.0-rc || ^15.0.0",
     "webpack": "^1.12.12"
   },
   "peerDependencies": {
-    "react": "^0.14.0"
+    "react": "^0.14 || ^15.0.0-rc || ^15.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.3"
