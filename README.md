@@ -1,2 +1,2 @@
-# react-pure-tap
-React tapping effect.
+# react-touch-button
+React touch button effect.
